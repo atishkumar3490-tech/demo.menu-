@@ -1,0 +1,396 @@
+
+
+
+Index · HTML
+<!DOCTYPE html>
+<html lang="en" data-theme="royal-dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0d">
+<title>The Velvet Fork – Digital Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ THEMES ============ */
+:root,[data-theme="royal-dark"]{--bg:#0b0b0d;--surface:#151518;--surface-2:#1e1e23;--accent:#d4b86a;--accent-soft:rgba(212,184,106,.14);--on-accent:#17120a;--text:#f5f0e6;--text-muted:#a8a396;--border:rgba(255,255,255,.09);--frame:#050506}
+[data-theme="espresso-amber"]{--bg:#1a0f0a;--surface:#27170f;--surface-2:#34200f;--accent:#f0a24b;--accent-soft:rgba(240,162,75,.15);--on-accent:#1f1006;--text:#fbf1e4;--text-muted:#c0a994;--border:rgba(255,235,210,.1);--frame:#0d0704}
+[data-theme="emerald-gold"]{--bg:#06201a;--surface:#0d2f26;--surface-2:#143e32;--accent:#e2c36f;--accent-soft:rgba(226,195,111,.15);--on-accent:#10200f;--text:#f3f1e3;--text-muted:#a3c1b3;--border:rgba(226,195,111,.14);--frame:#03110e}
+[data-theme="crimson-bistro"]{--bg:#121214;--surface:#1c1c20;--surface-2:#27272c;--accent:#d63a46;--accent-soft:rgba(214,58,70,.16);--on-accent:#fff;--text:#f8f3f3;--text-muted:#aaa2a4;--border:rgba(255,255,255,.09);--frame:#09090a}
+[data-theme="ivory-luxury"]{--bg:#f8f3e8;--surface:#fffdf8;--surface-2:#f0e8d7;--accent:#96681d;--accent-soft:rgba(150,104,29,.12);--on-accent:#fff;--text:#2b1d12;--text-muted:#6c5d4d;--border:rgba(43,29,18,.13);--frame:#d9d0bd}
+ 
+/* ============ BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:radial-gradient(ellipse at top,var(--frame),#000 140%);background-color:var(--frame);color:var(--text);min-height:100vh;transition:background-color .4s}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:110px;box-shadow:0 0 0 1px var(--border),0 0 80px rgba(0,0,0,.55);transition:background .4s}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600}
+ 
+/* ============ THEME SWITCHER ============ */
+.themer{position:fixed;top:12px;right:max(12px,calc(50vw - 228px));z-index:40}
+.themer>button{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--border);color:var(--accent);box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.themer svg{width:18px;height:18px}
+.themer .pop{position:absolute;top:46px;right:0;display:flex;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:30px;box-shadow:0 10px 26px rgba(0,0,0,.4);opacity:0;transform:translateY(-6px) scale(.96);pointer-events:none;transition:.2s}
+.themer.open .pop{opacity:1;transform:none;pointer-events:auto}
+.dot{width:24px;height:24px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 0 1px var(--border)}
+.dot.on{border-color:var(--text)}
+ 
+/* ============ HERO ============ */
+.hero{padding:60px 16px 6px;background:radial-gradient(120% 70% at 50% 0,var(--accent-soft),transparent 70%)}
+.glass{background:color-mix(in srgb,var(--surface) 72%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
+.id{display:flex;gap:14px;align-items:center}
+.logo{width:62px;height:62px;border-radius:18px;flex:none;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;font-size:23px;color:var(--on-accent);background:linear-gradient(145deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#000));overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.id h1{font-size:25px;line-height:1.15}
+.sub{color:var(--text-muted);font-size:13px;margin-top:3px}
+.status{display:flex;align-items:center;gap:8px;margin:14px 0;font-size:12.5px;color:var(--text-muted);flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:6px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(46,184,106,.14);color:#35c577}
+.live.closed{background:rgba(226,72,72,.14);color:#ef5b5b}
+.live i{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.25;transform:scale(.7)}}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.act{display:flex;flex-direction:column;align-items:center;gap:6px;padding:11px 4px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border);font-size:12px;font-weight:600;transition:.2s}
+.act:active{transform:scale(.96)}
+.act svg{width:20px;height:20px;color:var(--accent)}
+ 
+/* ============ OFFER STRIP ============ */
+.offer{margin:14px 0 0;overflow:hidden;white-space:nowrap;background:var(--accent-soft);border-block:1px solid var(--border);padding:9px 0;font-size:12.5px;font-weight:600;color:var(--accent)}
+.offer div{display:inline-block;padding-left:100%;animation:marq 22s linear infinite}
+.offer span{margin-right:60px}
+@keyframes marq{to{transform:translateX(-100%)}}
+ 
+/* ============ FILTER BAR ============ */
+.filters{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:12px 16px 10px;border-bottom:1px solid var(--border)}
+.frow{display:flex;gap:10px;align-items:center}
+.search{flex:1;position:relative}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--text-muted)}
+.search input{width:100%;height:42px;padding:0 14px 0 38px;border-radius:14px;background:var(--surface);border:1px solid var(--border);font-size:14px;outline:0;transition:border-color .2s}
+.search input:focus{border-color:var(--accent)}
+.search input::placeholder{color:var(--text-muted)}
+.vt{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;cursor:pointer;user-select:none}
+.sw{width:42px;height:24px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border);position:relative;transition:.25s;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-muted);transition:.25s}
+.vt[aria-checked="true"] .sw{background:#2eb86a;border-color:#2eb86a}
+.vt[aria-checked="true"] .sw::after{transform:translateX(18px);background:#fff}
+.pills{display:flex;gap:8px;overflow-x:auto;margin-top:12px;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:2px}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:none;padding:8px 15px;border-radius:20px;font-size:13px;font-weight:600;background:var(--surface);border:1px solid var(--border);color:var(--text-muted);transition:.2s}
+.pill.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+ 
+/* ============ MENU CARDS ============ */
+.list{padding:16px 16px 0;display:flex;flex-direction:column;gap:14px}
+.card{display:flex;justify-content:space-between;gap:14px;padding:14px 14px 26px;background:var(--surface);border:1px solid var(--border);border-radius:20px;animation:rise .4s both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.info{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:8px;margin-bottom:7px;min-height:18px}
+.vn{width:16px;height:16px;border:1.6px solid;border-radius:3px;display:grid;place-items:center;flex:none}
+.vn::after{content:"";display:block}
+.vn.v{color:#2eb86a}.vn.v::after{width:8px;height:8px;border-radius:50%;background:currentColor}
+.vn.n{color:#e24848}.vn.n::after{border:4.5px solid transparent;border-bottom:8px solid currentColor;border-top:0}
+.badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:12px;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.card h3{font-size:17px;line-height:1.25}
+.card p{font-size:12.5px;color:var(--text-muted);margin-top:5px;line-height:1.45}
+.price{font-weight:700;font-size:17px;margin-top:auto;padding-top:10px}
+.media{position:relative;width:108px;flex:none}
+.thumb{width:108px;height:108px;border-radius:18px;overflow:hidden;position:relative;display:grid;place-items:center;font-size:34px;background:linear-gradient(135deg,var(--surface-2),var(--accent-soft))}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ctrl{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);height:34px;width:92px}
+.add,.step{position:absolute;inset:0;border-radius:11px;font-weight:700;font-size:13px;animation:pop .22s}
+@keyframes pop{from{transform:scale(.8);opacity:.4}}
+.add{background:var(--surface);color:var(--accent);border:1.5px solid var(--accent);letter-spacing:.04em;box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.add:active{transform:scale(.95)}
+.step{display:flex;align-items:center;justify-content:space-between;background:var(--accent);color:var(--on-accent);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.step button{width:32px;height:100%;font-size:18px;font-weight:700;color:inherit}
+.step span{font-size:14px;min-width:16px;text-align:center}
+.empty{text-align:center;padding:50px 20px;color:var(--text-muted);font-size:14px;line-height:1.6}
+.empty b{display:block;font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:6px}
+ 
+/* ============ ABOUT & FOOTER ============ */
+.about{margin:26px 16px 0}
+.about h2{font-size:21px;margin-bottom:10px}
+.about p{font-size:13.5px;color:var(--text-muted);line-height:1.6}
+.about dl{margin-top:14px;display:grid;gap:10px;font-size:13.5px}
+.about dt{font-weight:700;color:var(--accent);font-size:12px}
+.credit{text-align:center;padding:26px 16px 10px;font-size:12px;color:var(--text-muted)}
+.credit a{color:var(--accent);font-weight:600;border-bottom:1px solid transparent}
+.credit a:hover{border-color:var(--accent)}
+ 
+/* ============ CART BAR ============ */
+.cartbar{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));width:min(456px,calc(100% - 24px));transform:translate(-50%,160%);z-index:30;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:18px;background:var(--accent);color:var(--on-accent);box-shadow:0 14px 36px rgba(0,0,0,.45);transition:transform .45s cubic-bezier(.2,.9,.3,1.1)}
+.cartbar.show{transform:translate(-50%,0)}
+.cartbar small{display:block;font-size:12px;font-weight:600;opacity:.8}
+.cartbar b{font-size:17px}
+.cartbar .go{font-weight:700;font-size:14.5px}
+ 
+/* ============ CHECKOUT SHEET ============ */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s}
+.ov.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;z-index:60;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;transform:translate(-50%,105%);background:var(--bg);border:1px solid var(--border);border-bottom:0;border-radius:26px 26px 0 0;padding:10px 18px max(20px,env(safe-area-inset-bottom));transition:transform .4s cubic-bezier(.2,.9,.3,1)}
+.sheet.open{transform:translate(-50%,0)}
+.grab{width:42px;height:4px;border-radius:4px;background:var(--border);margin:0 auto 14px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sh h2{font-size:22px}
+.x{width:34px;height:34px;border-radius:50%;background:var(--surface-2);font-size:16px}
+.li{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
+.li .nm{flex:1;min-width:0;font-size:14px;font-weight:600;display:flex;gap:8px;align-items:center}
+.li .nm span:last-child{overflow:hidden;text-overflow:ellipsis}
+.li .ctrl{position:relative;left:auto;bottom:auto;transform:none;width:84px;height:32px;flex:none}
+.li .lp{width:64px;text-align:right;font-weight:700;font-size:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;margin:16px 0 12px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+.seg button{padding:10px;border-radius:10px;font-size:13px;font-weight:700;color:var(--text-muted);transition:.2s}
+.seg button.on{background:var(--accent);color:var(--on-accent)}
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:5px}
+.field input,.field textarea{width:100%;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--border);font-size:14px;outline:0;resize:none}
+.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field.err input,.field.err textarea{border-color:#e24848;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.bill{margin:14px 0;padding:14px;border-radius:16px;background:var(--surface);border:1px solid var(--border);font-size:14px;display:grid;gap:9px}
+.bill div{display:flex;justify-content:space-between}
+.bill .disc{color:#35c577;font-weight:600}
+.bill .hint{font-size:12px;color:var(--accent);display:block}
+.bill .tot{font-size:17px;font-weight:700;padding-top:10px;border-top:1px dashed var(--border)}
+.confirm{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:16px;font-weight:700;font-size:15.5px;background:#1fa855;color:#fff;box-shadow:0 10px 26px rgba(31,168,85,.35);transition:transform .15s}
+.confirm:active{transform:scale(.98)}
+.confirm svg{width:20px;height:20px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="themer" id="themer" hidden>
+  <button id="themeBtn" aria-label="Preview color themes" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="15.5" cy="7.5" r="1"/></svg></button>
+  <div class="pop" id="themePop"></div>
+</div>
+ 
+<div class="app" id="app">
+  <header class="hero">
+    <div class="glass">
+      <div class="id">
+        <div class="logo" id="logo"></div>
+        <div><h1 id="bName"></h1><div class="sub" id="bSub"></div></div>
+      </div>
+      <div class="status"><span class="live" id="live"><i></i><span id="liveTxt"></span></span><span id="bTime"></span></div>
+      <nav class="actions" aria-label="Quick actions">
+        <a class="act" id="aCall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+        <a class="act" id="aMap" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>Directions</a>
+        <a class="act" id="aIg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>Instagram</a>
+      </nav>
+    </div>
+    <div class="offer" id="offer" aria-label="Current offer"></div>
+  </header>
+ 
+  <section class="filters" aria-label="Menu filters">
+    <div class="frow">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Search dishes" autocomplete="off" aria-label="Search dishes"></label>
+      <div class="vt" id="vt" role="switch" aria-checked="false" tabindex="0"><span>Veg only</span><i class="sw"></i></div>
+    </div>
+    <div class="pills" id="pills" role="tablist"></div>
+  </section>
+ 
+  <main class="list" id="list" aria-live="polite"></main>
+ 
+  <section class="about glass" aria-labelledby="abT">
+    <h2 id="abT">About us</h2>
+    <p id="abTxt"></p>
+    <dl><div><dt>Address</dt><dd id="abAddr"></dd></div><div><dt>Open daily</dt><dd id="abTime"></dd></div><div><dt>Phone</dt><dd id="abPh"></dd></div></dl>
+  </section>
+  <footer class="credit" id="credit"></footer>
+</div>
+ 
+<button class="cartbar" id="cartbar" aria-label="Review order">
+  <span><small id="cbCount"></small><b id="cbTotal"></b></span><span class="go">Review Order →</span>
+</button>
+<div class="ov" id="ov"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Your order"></div>
+ 
+<script>
+/* =====================================================================
+   RESTAURANT_CONFIG — EDIT ONLY THIS BLOCK TO ONBOARD A NEW RESTAURANT
+   ===================================================================== */
+const RESTAURANT_CONFIG = {
+  brand: {
+    name: "The Velvet Fork",
+    subtitle: "Artisan Cafe & Kitchen",
+    initials: "VF",
+    logoUrl: "",                                  // optional: image URL replaces the initials badge
+    address: "Boring Road Crossing, Patna",
+    timing: "11:00 AM – 11:00 PM",
+    hours: [11, 23],                              // [open hour, close hour] in 24h format – drives "Open Now"
+    phone: "+919999999999",
+    whatsapp: "919999999999",                     // country code + number, no "+" or spaces
+    instagram: "https://instagram.com/",
+    mapsUrl: "https://maps.google.com/",
+    offerText: "✨ Flat 10% OFF on Direct WhatsApp Orders above ₹499",
+    about: "A candle-lit corner of Patna where slow coffee, wood-fired plates and North Indian classics are made fresh to order."
+  },
+  discount: { minSubtotal: 499, percent: 10 },    // auto-discount applied in cart
+  defaultTheme: "royal-dark",                     // royal-dark | espresso-amber | emerald-gold | crimson-bistro | ivory-luxury
+  showThemeSwitcher: true,                        // false = hide palette icon for final client delivery
+  agencyCredit: { text: "Digital Menu by Legend Web Studio", url: "https://instagram.com/legend.webstudio" },
+  categories: ["All", "Chef’s Special", "Coffee & Shakes", "Starters", "Mains & Combos", "Desserts"],
+  menu: [
+    { id: 1,  name: "Truffle Paneer Tikka", category: "Starters", price: 349, veg: true, badge: "Chef’s Special", description: "Charcoal-grilled paneer, truffle-mint glaze, pickled onions.", img: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&q=70&auto=format&fit=crop" },
+    { id: 2,  name: "Hara Bhara Kebab", category: "Starters", price: 279, veg: true, badge: "", description: "Spinach and green pea patties with mint chutney.", img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=300&q=70&auto=format&fit=crop" },
+    { id: 3,  name: "Chicken Malai Tikka", category: "Starters", price: 389, veg: false, badge: "Bestseller", description: "Creamy cashew-marinated chicken, finished in the tandoor.", img: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300&q=70&auto=format&fit=crop" },
+    { id: 4,  name: "Peri Peri Fries", category: "Starters", price: 199, veg: true, badge: "New", description: "Crisp fries tossed in smoky peri peri spice.", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300&q=70&auto=format&fit=crop" },
+    { id: 5,  name: "Velvet Cold Coffee", category: "Coffee & Shakes", price: 189, veg: true, badge: "Bestseller", description: "Slow-brewed coffee blended with vanilla ice cream.", img: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&q=70&auto=format&fit=crop" },
+    { id: 6,  name: "Hazelnut Cappuccino", category: "Coffee & Shakes", price: 219, veg: true, badge: "", description: "Double espresso, steamed milk, toasted hazelnut.", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&q=70&auto=format&fit=crop" },
+    { id: 7,  name: "Belgian Chocolate Shake", category: "Coffee & Shakes", price: 249, veg: true, badge: "New", description: "Thick dark-chocolate shake with whipped cream.", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300&q=70&auto=format&fit=crop" },
+    { id: 8,  name: "Saffron Mango Lassi", category: "Coffee & Shakes", price: 159, veg: true, badge: "", description: "Chilled hand-churned curd, Alphonso pulp, kesar.", img: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=300&q=70&auto=format&fit=crop" },
+    { id: 9,  name: "Butter Chicken Royale", category: "Mains & Combos", price: 449, veg: false, badge: "Chef’s Special", description: "Smoked tandoori chicken in silky tomato-butter gravy.", img: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300&q=70&auto=format&fit=crop" },
+    { id: 10, name: "Dal Makhani & Naan Combo", category: "Mains & Combos", price: 379, veg: true, badge: "Bestseller", description: "Overnight black dal with two butter naans.", img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=300&q=70&auto=format&fit=crop" },
+    { id: 11, name: "Hyderabadi Dum Biryani", category: "Mains & Combos", price: 429, veg: false, badge: "", description: "Sealed-pot basmati and tender chicken with raita.", img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=300&q=70&auto=format&fit=crop" },
+    { id: 12, name: "Wood-Fired Margherita", category: "Mains & Combos", price: 359, veg: true, badge: "", description: "Hand-stretched base, San Marzano tomato, fresh basil.", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&q=70&auto=format&fit=crop" },
+    { id: 13, name: "Molten Lava Cake", category: "Desserts", price: 229, veg: true, badge: "Bestseller", description: "Warm dark chocolate centre with vanilla bean ice cream.", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&q=70&auto=format&fit=crop" },
+    { id: 14, name: "Gulab Jamun Cheesecake", category: "Desserts", price: 249, veg: true, badge: "Chef’s Special", description: "Baked cheesecake layered with rose-syrup gulab jamun.", img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=300&q=70&auto=format&fit=crop" },
+    { id: 15, name: "Biscoff Tiramisu", category: "Desserts", price: 269, veg: true, badge: "New", description: "Espresso-soaked layers, mascarpone, caramel crumble.", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=300&q=70&auto=format&fit=crop" }
+  ]
+};
+/* ============================ END OF CONFIG ============================ */
+ 
+(function () {
+  "use strict";
+  const C = RESTAURANT_CONFIG, B = C.brand;
+  const THEMES = { "royal-dark": ["Royal Dark", "#d4b86a", "#0b0b0d"], "espresso-amber": ["Espresso Amber", "#f0a24b", "#1a0f0a"], "emerald-gold": ["Emerald Gold", "#e2c36f", "#06201a"], "crimson-bistro": ["Crimson Bistro", "#d63a46", "#121214"], "ivory-luxury": ["Ivory Luxury", "#96681d", "#f8f3e8"] };
+  const $ = s => document.querySelector(s);
+  const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+  const norm = s => String(s).replace(/[’‘]/g, "'").toLowerCase();
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const S = { cat: "All", q: "", veg: false, cart: {}, type: "dine" };
+  const byId = id => C.menu.find(m => m.id === id);
+ 
+  /* ---------- Theme ---------- */
+  function setTheme(t) {
+    if (!THEMES[t]) t = "royal-dark";
+    document.documentElement.setAttribute("data-theme", t);
+    document.querySelector('meta[name="theme-color"]').setAttribute("content", THEMES[t][2]);
+    document.querySelectorAll(".dot").forEach(d => d.classList.toggle("on", d.dataset.t === t));
+    if (C.showThemeSwitcher) store.set("vf-theme", t);
+  }
+  function initTheme() {
+    const tm = $("#themer");
+    $("#themePop").innerHTML = Object.keys(THEMES).map(k => `<button class="dot" data-t="${k}" title="${THEMES[k][0]}" aria-label="${THEMES[k][0]} theme" style="background:linear-gradient(135deg,${THEMES[k][2]} 50%,${THEMES[k][1]} 50%)"></button>`).join("");
+    tm.hidden = !C.showThemeSwitcher;
+    setTheme(C.showThemeSwitcher && store.get("vf-theme") || C.defaultTheme);
+    $("#themeBtn").onclick = e => { e.stopPropagation(); const o = tm.classList.toggle("open"); $("#themeBtn").setAttribute("aria-expanded", o); };
+    $("#themePop").onclick = e => { const d = e.target.closest(".dot"); if (d) setTheme(d.dataset.t); };
+    document.addEventListener("click", e => { if (!tm.contains(e.target)) tm.classList.remove("open"); });
+  }
+ 
+  /* ---------- Static content ---------- */
+  function initStatic() {
+    document.title = B.name + " – Digital Menu";
+    $("#bName").textContent = B.name; $("#bSub").textContent = B.subtitle; $("#bTime").textContent = B.timing;
+    $("#logo").innerHTML = B.logoUrl ? `<img src="${esc(B.logoUrl)}" alt="${esc(B.name)} logo" onerror="this.parentNode.textContent='${esc(B.initials)}'">` : esc(B.initials);
+    $("#aCall").href = "tel:" + B.phone; $("#aMap").href = B.mapsUrl; $("#aIg").href = B.instagram;
+    $("#offer").innerHTML = `<div><span>${esc(B.offerText)}</span><span>${esc(B.offerText)}</span><span>${esc(B.offerText)}</span></div>`;
+    $("#abTxt").textContent = B.about || ""; $("#abAddr").textContent = B.address; $("#abTime").textContent = B.timing; $("#abPh").innerHTML = `<a href="tel:${esc(B.phone)}">${esc(B.phone)}</a>`;
+    $("#credit").innerHTML = `<a href="${esc(C.agencyCredit.url)}" target="_blank" rel="noopener">${esc(C.agencyCredit.text)}</a>`;
+    const upd = () => { const h = new Date().getHours(), [o, c] = B.hours, open = o < c ? h >= o && h < c : h >= o || h < c; $("#live").classList.toggle("closed", !open); $("#liveTxt").textContent = open ? "● Open Now" : "● Closed Now"; };
+    upd(); setInterval(upd, 60000);
+  }
+ 
+  /* ---------- Menu ---------- */
+  function renderPills() {
+    $("#pills").innerHTML = C.categories.map(c => `<button class="pill${c === S.cat ? " on" : ""}" role="tab" aria-selected="${c === S.cat}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  }
+  const ctrl = id => { const n = S.cart[id] || 0; return n ? `<div class="step"><button data-act="dec" aria-label="Remove one">−</button><span>${n}</span><button data-act="inc" aria-label="Add one">+</button></div>` : `<button class="add" data-act="inc">+ ADD</button>`; };
+  function renderMenu() {
+    const q = norm(S.q.trim());
+    const items = C.menu.filter(m => (S.cat === "All" || norm(m.category) === norm(S.cat) || norm(m.badge) === norm(S.cat)) && (!S.veg || m.veg) && (!q || norm(m.name + " " + m.description + " " + m.category).includes(q)));
+    $("#list").innerHTML = items.length ? items.map((m, i) => `
+      <article class="card" style="animation-delay:${Math.min(i, 8) * 40}ms">
+        <div class="info">
+          <div class="top"><span class="vn ${m.veg ? "v" : "n"}" role="img" aria-label="${m.veg ? "Vegetarian" : "Non-vegetarian"}"></span>${m.badge ? `<span class="badge">${esc(m.badge)}</span>` : ""}</div>
+          <h3>${esc(m.name)}</h3><p>${esc(m.description)}</p><div class="price">${inr(m.price)}</div>
+        </div>
+        <div class="media" data-id="${m.id}">
+          <div class="thumb"><span aria-hidden="true">${m.veg ? "🥗" : "🍗"}</span>${m.img ? `<img src="${esc(m.img)}" alt="${esc(m.name)}" loading="lazy" onerror="this.remove()">` : ""}</div>
+          <div class="ctrl">${ctrl(m.id)}</div>
+        </div>
+      </article>`).join("") : `<div class="empty"><b>No dishes found</b>Try a different search or turn off the Veg only filter.</div>`;
+  }
+ 
+  /* ---------- Cart ---------- */
+  function totals() {
+    let sub = 0, count = 0;
+    for (const id in S.cart) { const m = byId(+id); sub += m.price * S.cart[id]; count += S.cart[id]; }
+    const d = C.discount, disc = sub >= d.minSubtotal ? Math.round(sub * d.percent / 100) : 0;
+    return { sub, count, disc, total: sub - disc };
+  }
+  function change(id, delta) {
+    const n = (S.cart[id] || 0) + delta;
+    if (n <= 0) delete S.cart[id]; else S.cart[id] = n;
+    document.querySelectorAll(`.media[data-id="${id}"] .ctrl`).forEach(c => c.innerHTML = ctrl(id));
+    refresh();
+  }
+  function refresh() {
+    const t = totals();
+    $("#cbCount").textContent = t.count + (t.count === 1 ? " item" : " items");
+    $("#cbTotal").textContent = inr(t.total);
+    $("#cartbar").classList.toggle("show", t.count > 0 && !$("#sheet").classList.contains("open"));
+    if ($("#sheet").classList.contains("open")) { if (!t.count) closeSheet(); else renderSheet(true); }
+  }
+ 
+  /* ---------- Checkout sheet ---------- */
+  function renderSheet(keep) {
+    const t = totals(), d = C.discount, sh = $("#sheet");
+    const saved = keep ? { n: $("#fTable") && $("#fTable").value, nm: $("#fName") && $("#fName").value, a: $("#fAddr") && $("#fAddr").value } : {};
+    const lines = Object.keys(S.cart).map(id => { const m = byId(+id), n = S.cart[id]; return `<div class="li" data-id="${id}"><div class="nm"><span class="vn ${m.veg ? "v" : "n"}"></span><span>${esc(m.name)}</span></div><div class="ctrl"><div class="step"><button data-act="dec" aria-label="Remove one">−</button><span>${n}</span><button data-act="inc" aria-label="Add one">+</button></div></div><div class="lp">${inr(m.price * n)}</div></div>`; }).join("");
+    const hint = t.disc ? "" : `<span class="hint">Add ${inr(d.minSubtotal - t.sub)} more to unlock ${d.percent}% OFF</span>`;
+    sh.innerHTML = `<div class="grab"></div><div class="sh"><h2>Your order</h2><button class="x" data-close aria-label="Close">✕</button></div>${lines}
+      <div class="seg" role="tablist"><button data-type="dine" class="${S.type === "dine" ? "on" : ""}">Dine-In</button><button data-type="delivery" class="${S.type === "delivery" ? "on" : ""}">Delivery / Takeaway</button></div>
+      ${S.type === "dine" ? `<label class="field" id="gTable"><span>Table number</span><input id="fTable" inputmode="numeric" maxlength="6" placeholder="e.g. 12"></label>` : `<label class="field" id="gName"><span>Your name</span><input id="fName" autocomplete="name" placeholder="Full name"></label><label class="field" id="gAddr"><span>Delivery address or takeaway note</span><textarea id="fAddr" rows="2" placeholder="House no., landmark, or “Takeaway at 8 PM”"></textarea></label>`}
+      <div class="bill"><div><span>Subtotal</span><span>${inr(t.sub)}</span></div>${t.disc ? `<div class="disc"><span>Discount (${d.percent}%)</span><span>− ${inr(t.disc)}</span></div>` : ""}${hint}<div class="tot"><span>Grand total</span><span>${inr(t.total)}</span></div></div>
+      <button class="confirm" data-confirm><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>Confirm Order on WhatsApp</button>`;
+    if (keep) { if (saved.n && $("#fTable")) $("#fTable").value = saved.n; if (saved.nm && $("#fName")) $("#fName").value = saved.nm; if (saved.a && $("#fAddr")) $("#fAddr").value = saved.a; }
+  }
+  function openSheet() { renderSheet(); $("#ov").classList.add("open"); $("#sheet").classList.add("open"); $("#cartbar").classList.remove("show"); document.body.style.overflow = "hidden"; }
+  function closeSheet() { $("#ov").classList.remove("open"); $("#sheet").classList.remove("open"); document.body.style.overflow = ""; refresh(); }
+  function confirmOrder() {
+    const bad = id => { const g = $(id); g.classList.add("err"); g.querySelector("input,textarea").focus(); setTimeout(() => g.classList.remove("err"), 900); };
+    const dine = S.type === "dine", table = dine ? $("#fTable").value.trim() : "", name = dine ? "" : $("#fName").value.trim(), addr = dine ? "" : $("#fAddr").value.trim();
+    if (dine && !table) return bad("#gTable");
+    if (!dine && !name) return bad("#gName");
+    if (!dine && !addr) return bad("#gAddr");
+    const t = totals(), L = [];
+    L.push(`*${B.name} – New Order*`, "", `*Order Type:* ${dine ? "Dine-In" : "Delivery / Takeaway"}`);
+    if (dine) L.push(`*Table No:* ${table}`); else L.push(`*Name:* ${name}`, `*Address / Note:* ${addr}`);
+    L.push("", "*Items*");
+    Object.keys(S.cart).forEach((id, i) => { const m = byId(+id), n = S.cart[id]; L.push(`${i + 1}. ${m.name} × ${n} – ${inr(m.price * n)}`); });
+    L.push("", `Subtotal: ${inr(t.sub)}`);
+    if (t.disc) L.push(`Discount (${C.discount.percent}%): − ${inr(t.disc)}`);
+    L.push(`*Grand Total: ${inr(t.total)}*`, "", "Thank you! 🙏");
+    const url = `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(L.join("\n"))}`;
+    if (!window.open(url, "_blank", "noopener")) location.href = url;
+  }
+ 
+  /* ---------- Events ---------- */
+  function bind() {
+    $("#pills").onclick = e => { const p = e.target.closest(".pill"); if (!p) return; S.cat = p.dataset.c; renderPills(); renderMenu(); p.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" }); };
+    $("#q").oninput = e => { S.q = e.target.value; renderMenu(); };
+    const vt = $("#vt"), tv = () => { S.veg = !S.veg; vt.setAttribute("aria-checked", S.veg); renderMenu(); };
+    vt.onclick = tv; vt.onkeydown = e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); tv(); } };
+    $("#cartbar").onclick = openSheet; $("#ov").onclick = closeSheet;
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#sheet").classList.contains("open")) closeSheet(); });
+    document.addEventListener("click", e => {
+      const a = e.target.closest("[data-act]");
+      if (a) { const host = a.closest("[data-id]"); if (host) change(+host.dataset.id, a.dataset.act === "inc" ? 1 : -1); return; }
+      if (e.target.closest("[data-close]")) closeSheet();
+      const ty = e.target.closest("[data-type]"); if (ty) { S.type = ty.dataset.type; renderSheet(); }
+      if (e.target.closest("[data-confirm]")) confirmOrder();
+    });
+  }
+ 
+  initTheme(); initStatic(); renderPills(); renderMenu(); refresh(); bind();
+})();
+</script>
+</body>
+</html>
+ 
